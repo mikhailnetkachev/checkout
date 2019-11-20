@@ -1,0 +1,29 @@
+@import "styles/variables/all"
+@import "styles/mixins/all"
+
+.container
+  overflow-x: hidden
+  margin: 50px auto 0
+  max-width: 600px
+
+.tape
+  @include resetList()
+  position: relative
+  display: flex
+  transition: left $timeAverage ease-out
+
+.card
+  flex: 1 0 100%
+  transform: scale($scaleDown)
+  transition: $timeAverage
+  opacity: $opacityHigh
+  box-sizing: border-box
+  border-radius: 8px
+  padding: 56px
+  color: $colorTextDefault
+  background-color: $colorWhite
+
+.activeCard
+  opacity: 1
+  transform: scale(1)
+

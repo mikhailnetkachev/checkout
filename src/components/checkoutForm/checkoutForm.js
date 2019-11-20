@@ -1,6 +1,7 @@
 import React from 'react';
 
 import StatusBar from './statusBar';
+import StepsTape from './stepsTape';
 
 import {
   container as containerClass
@@ -9,8 +10,8 @@ import {
 class CheckoutForm extends React.Component {
 
   state = {
-    currentStepIndex: 1,
-    steps: null
+    currentStepIndex: 0,
+    steps: null,
   };
 
   componentDidMount () {
@@ -22,6 +23,36 @@ class CheckoutForm extends React.Component {
 
     this.setState({ steps });
   }
+
+  decrementStepIndex = () => {
+    this.setState(({ currentStepIndex }) => {
+      const newValue = currentStepIndex - 1;
+      const nextValue = newValue < 0 ? currentStepIndex : newValue;
+
+      return { currentStepIndex: nextValue };
+    })
+  };
+
+  incrementStepIndex = () => {
+    this.setState(({ currentStepIndex, steps }) => {
+      const newValue = currentStepIndex + 1;
+      const nextValue = newValue < steps.length ? newValue : currentStepIndex;
+
+      return { currentStepIndex: nextValue };
+    });
+  };
+
+  goPreviousStep = () => {
+    this.decrementStepIndex();
+  };
+
+  goNextStep = (data) => {
+    this.incrementStepIndex();
+  };
+
+  submit = () => {
+    console.log('Submitted');
+  };
 
   render () {
     const { currentStepIndex, steps } = this.state;
@@ -37,6 +68,13 @@ class CheckoutForm extends React.Component {
         <StatusBar
           currentStepIndex={currentStepIndex}
           steps={steps}
+        />
+        <StepsTape
+          currentStepIndex={currentStepIndex}
+          steps={steps}
+          goPreviousStep={this.goPreviousStep}
+          goNextStep={this.goNextStep}
+          submit={this.submit}
         />
       </div>
     );

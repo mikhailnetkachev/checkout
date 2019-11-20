@@ -1,0 +1,51 @@
+@import "styles/variables/all"
+@import "styles/mixins/all"
+
+.container
+  margin: 0 auto
+  max-width: 490px
+
+.title
+  font-size: 40px
+  font-weight: bold
+  line-height: 1.6
+  text-transform: capitalize
+  text-align: center
+
+.list
+  @include resetList()
+
+  display: flex
+  align-items: center
+  margin-top: 20px
+
+  > li
+    &:not(:first-child)
+      flex-grow: 1
+      display: flex
+      align-items: center
+
+      &:before
+        content: ''
+        flex-grow: 1
+        height: 2px
+        background: #E8E8E8
+        opacity: 0.2
+        border-radius: 8px
+
+.itemIcon
+  $size: 30px
+
+  margin: 0 8px
+  border-radius: 50%
+  width: $size
+  height: $size
+  font-size: 18px
+  font-weight: bold
+  line-height: $size + 2px
+  text-align: center
+  background-color: $colorBackgroundSub
+  color: $colorWhite
+
+.activeItem
+  background-color: $colorBackgroundAccent

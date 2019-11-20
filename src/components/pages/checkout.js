@@ -1,8 +1,12 @@
 import React from 'react';
 
+import CheckoutForm from '../checkoutForm';
+
 const Checkout = () => {
   return (
-    <div>Checkout page is here!</div>
+    <div className="appWrapper">
+      <CheckoutForm/>
+    </div>
   );
 };
 

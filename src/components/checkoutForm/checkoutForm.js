@@ -17,23 +17,19 @@ class CheckoutForm extends React.Component {
   };
 
   componentDidMount () {
-    const steps = [
-      { type: 'contacts', title: 'Your contacts' },
-      { type: 'contacts', title: 'Your contacts, again' },
-      { type: 'contacts', title: 'And again your contacts' },
-    ];
+    const item = {
+      type: 'contacts', title: 'Your contacts',
+      fields: [
+        { name: 'companyName', type: 'text', checks: null, title: 'Your company name' },
+        { name: 'numberOfPeople', type: 'number', checks: [{ title: 'required' }, { title: 'range', from: 1, to: 99 }], title: 'Number of people' },
+        { name: 'businessArea', type: 'text', checks: [{ title: 'required' }], title: 'Business area' },
+        { name: 'description', type: 'area', checks: [{ title: 'required' }], title: 'Description' },
+      ]
+    };
+    const steps = [item, item, item];
 
     this.setState({ steps });
   }
-
-  decrementStepIndex = () => {
-    this.setState(({ currentStepIndex }) => {
-      const newValue = currentStepIndex - 1;
-      const nextValue = newValue < 0 ? currentStepIndex : newValue;
-
-      return { currentStepIndex: nextValue };
-    })
-  };
 
   incrementStepIndex = () => {
     this.setState(({ currentStepIndex, steps }) => {
@@ -44,13 +40,9 @@ class CheckoutForm extends React.Component {
     });
   };
 
-  goPreviousStep = () => {
-    this.decrementStepIndex();
-  };
-
   goNextStep = (index, data) => {
-    this.incrementStepIndex();
     this.setData(index, data);
+    this.incrementStepIndex();
   };
 
   setData = (index, data) => {
@@ -66,7 +58,7 @@ class CheckoutForm extends React.Component {
     setTimeout(() => {
       console.log('Total', this.state.results);
       this.props.history.push('/thanks');
-    }, 1000);
+    }, 0);
   };
 
   render () {

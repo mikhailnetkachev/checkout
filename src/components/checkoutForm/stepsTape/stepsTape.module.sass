@@ -8,6 +8,7 @@
 
 .tape
   @include resetList()
+
   position: relative
   display: flex
   transition: left $timeAverage ease-out
@@ -29,4 +30,38 @@
 .activeCard
   opacity: 1
   transform: scale(1)
+
+.contacts
+  [class="fields"]
+
+    label
+      &:not(:first-child)
+        margin-top: 40px
+
+    @include media()
+      display: flex
+      flex-wrap: wrap
+      justify-content: space-between
+
+      label
+        flex-basis: 100%
+
+        &:not(:first-child)
+          margin-top: 20px
+
+        &:nth-child(1)
+          flex-basis: 55%
+
+        &:nth-child(2)
+          flex-basis: 37%
+          margin-top: 0
+
+  [class="options"]
+    margin-top: 40px
+
+    [type="submit"]
+      width: 100%
+
+      @include media()
+        width: 144px
 

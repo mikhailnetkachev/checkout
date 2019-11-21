@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Contacts from './contacts';
+import FormBuilder from '../../formBuilder';
 import { combineStrings as cs } from '../../../helpers';
 
 import {
@@ -8,6 +8,7 @@ import {
   tape as tapeClass,
   card as cardClass,
   activeCard as activeCardClass,
+  contacts as contactsClass,
 } from './stepsTape.module.sass';
 
 const StepsTape = ({ currentStepIndex, steps, goPreviousStep, goNextStep, submit }) => {
@@ -21,20 +22,18 @@ const StepsTape = ({ currentStepIndex, steps, goPreviousStep, goNextStep, submit
         {
           steps.map((item, index) => {
             const activeClass = currentStepIndex === index ? activeCardClass : null;
+            const isLastStep = index === steps.length - 1;
+            const onSubmit = isLastStep
+              ? (data) => { goNextStep(index, data); submit(); }
+              : (data) => { goNextStep(index, data) };
 
             return (
               <li className={cs()(cardClass, activeClass)} key={index}>
-                {
-                  item.type === 'contacts' ? (
-                    <Contacts
-                      steps={steps}
-                      index={index}
-                      goPreviousStep={goPreviousStep}
-                      goNextStep={goNextStep}
-                      submit={submit}
-                    />
-                  ) : null
-                }
+                <FormBuilder
+                  className={contactsClass}
+                  fields={item.fields}
+                  onSubmit={onSubmit}
+                />
               </li>
             );
           })

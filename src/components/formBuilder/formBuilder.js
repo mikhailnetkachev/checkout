@@ -142,6 +142,8 @@ class FormBuilder extends React.Component {
               if (item.type === 'area') {
                 return (
                   <Textarea
+                    className="textareaDefault"
+                    key={item.name}
                     { ...item}
                     onChange={this.onChange}
                     onBlur={this.onFocusOut}
@@ -151,6 +153,8 @@ class FormBuilder extends React.Component {
 
               return (
                 <Input
+                  className="inputDefault"
+                  key={item.name}
                   { ...item}
                   onChange={this.onChange}
                   onBlur={this.onFocusOut}
@@ -160,7 +164,7 @@ class FormBuilder extends React.Component {
           }
         </div>
         <div className="options">
-          <button type="submit">Submit</button>
+          <button className="buttonDefault" type="submit">Submit</button>
         </div>
       </form>
     );

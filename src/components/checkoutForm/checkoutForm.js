@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import StatusBar from './statusBar';
 import StepsTape from './stepsTape';
@@ -12,13 +13,14 @@ class CheckoutForm extends React.Component {
   state = {
     currentStepIndex: 0,
     steps: null,
+    results: [],
   };
 
   componentDidMount () {
     const steps = [
       { type: 'contacts', title: 'Your contacts' },
       { type: 'contacts', title: 'Your contacts, again' },
-      { type: 'contacts', title: 'Your contacts and again' },
+      { type: 'contacts', title: 'And again your contacts' },
     ];
 
     this.setState({ steps });
@@ -46,12 +48,26 @@ class CheckoutForm extends React.Component {
     this.decrementStepIndex();
   };
 
-  goNextStep = (data) => {
+  goNextStep = (index, data) => {
     this.incrementStepIndex();
+    this.setData(index, data);
+  };
+
+  setData = (index, data) => {
+    this.setState((previousState) => {
+      const results = previousState.results.slice();
+      results[index] = data;
+
+      return { results };
+    });
   };
 
   submit = () => {
-    console.log('Submitted');
+    setTimeout(() => {
+      console.log('Total', this.state.results);
+    }, 1000);
+
+    this.props.history.push('/');
   };
 
   render () {
@@ -81,4 +97,4 @@ class CheckoutForm extends React.Component {
   }
 }
 
-export default CheckoutForm;
+export default withRouter(CheckoutForm);

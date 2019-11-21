@@ -1,13 +1,12 @@
 import React from 'react';
 
-import CardOptions from './cardOptions';
+import Contacts from './contacts';
 import { combineStrings as cs } from '../../../helpers';
 
 import {
   container as containerClass,
   tape as tapeClass,
   card as cardClass,
-  cardContent as cardContentClass,
   activeCard as activeCardClass,
 } from './stepsTape.module.sass';
 
@@ -25,18 +24,17 @@ const StepsTape = ({ currentStepIndex, steps, goPreviousStep, goNextStep, submit
 
             return (
               <li className={cs()(cardClass, activeClass)} key={index}>
-                <form>
-                  <div className={cardContentClass}>
-                    <div>Hello</div>
-                  </div>
-                  <CardOptions
-                    steps={steps}
-                    index={index}
-                    goPreviousStep={goPreviousStep}
-                    goNextStep={goNextStep}
-                    submit={submit}
-                  />
-                </form>
+                {
+                  item.type === 'contacts' ? (
+                    <Contacts
+                      steps={steps}
+                      index={index}
+                      goPreviousStep={goPreviousStep}
+                      goNextStep={goNextStep}
+                      submit={submit}
+                    />
+                  ) : null
+                }
               </li>
             );
           })

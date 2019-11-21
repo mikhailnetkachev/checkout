@@ -15,3 +15,58 @@
 
   @include hover()
     background-color: $colorBackgroundSub
+
+.labelDefault
+  position: relative
+  display: block
+  margin-bottom: 20px
+
+  .title
+    font-size: 14px
+    font-weight: bold
+    line-height: 1.7
+    color: $colorTextDefault
+
+  .withFlag
+    &:after
+      content: '*'
+      display: inline
+      margin-left: 4px
+      color: $colorTextAccent
+
+  .error
+    position: absolute
+    top: 100%
+    left: 0
+    margin-top: 8px
+    font-size: 12px
+    line-height: 1
+    color: $colorTextAccent
+
+  .field, .area
+    display: block
+    outline: none
+    box-sizing: border-box
+    margin-top: 8px
+    border: 1px solid $colorBackgroundDefault
+    border-radius: 8px
+    width: 100%
+    font-family: $fontDefault
+    font-size: 16px
+    line-height: 32px
+    color: $colorTextSub
+    background-color: $colorBackgroundDefault
+
+    //&:invalid
+    //  border: 1px solid $colorTextAccent
+
+  .field
+    padding: 8px 16px
+
+  .area
+    resize: none
+    padding: 14px 16px
+    height: 168px
+
+  .warn
+    border-color: $colorTextAccent

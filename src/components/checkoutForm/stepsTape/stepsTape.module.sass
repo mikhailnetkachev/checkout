@@ -19,9 +19,12 @@
   opacity: $opacityHigh
   box-sizing: border-box
   border-radius: 8px
-  padding: 56px
+  padding: 40px 20px
   color: $colorTextDefault
   background-color: $colorWhite
+
+  @include media()
+    padding: 56px
 
 .activeCard
   opacity: 1

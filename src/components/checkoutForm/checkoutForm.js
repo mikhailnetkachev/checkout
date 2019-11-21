@@ -24,6 +24,7 @@ class CheckoutForm extends React.Component {
         { name: 'numberOfPeople', type: 'number', checks: [{ title: 'required' }, { title: 'range', from: 1, to: 99 }], title: 'Number of people', placeholder: '1-99' },
         { name: 'businessArea', type: 'text', checks: [{ title: 'required' }], title: 'Business area', placeholder: 'Design, Marketing, Development, etc.' },
         { name: 'description', type: 'area', checks: [{ title: 'required' }], title: 'Description', placeholder: 'Type text' },
+        { name: 'attachment', type: 'file', checks: null, title: 'Add file as attachment' }
       ]
     };
     const steps = [item, item, item];

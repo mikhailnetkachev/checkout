@@ -38,6 +38,8 @@
     &::placeholder
       color: $colorTextSub
 
+    &:focus
+      border-color: $colorBackgroundSub
 
   .title
     font-size: 14px
@@ -72,9 +74,52 @@
     padding: 14px 16px
     height: 168px
 
+.attachmentInputDefault
+  $size: 48px
+  $color: #333333
+
+  display: flex
+  align-items: baseline
+  box-sizing: border-box
+  border: 1px solid rgba($color, .2)
+  border-radius: 10px
+  padding: 0 24px
+  height: $size
+  font-family: $fontDefault
+  font-size: 14px
+  line-height: $size
+  background-color: $colorWhite
+  color: $color
+
+  @include hover()
+    border-color: $colorBackgroundSub
+
+  .icon
+    &:before
+      content: ''
+      display: inline-block
+      height: 100%
+      vertical-align: center
+
+    img
+      display: inline-block
+      vertical-align: middle
+
+  .title
+    display: none
+    margin: 0 16px
+
+    @include media()
+      display: block
+
+  .counter
+    margin-left: auto
+    color: $colorTextSub
+
 .titleDefault
   font-size: 40px
   font-weight: bold
   line-height: 1.6
   text-transform: capitalize
   text-align: center
+

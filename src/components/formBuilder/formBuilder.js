@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input, Textarea } from '../customs';
+import { AttachmentInput, Input, Textarea } from '../customs';
 
 import {
   combineStrings as cs,
@@ -37,6 +37,20 @@ class FormBuilder extends React.Component {
 
   onFocusOut = ({ target: { name } }) => {
     this.validateField(name);
+  };
+
+  onAttachment = (event) => {
+    event.preventDefault();
+
+    const { target: { name }} = event;
+
+    this.setState(({ fields }) => {
+      const field = fields.find((item) => item.name === name);
+      const updatedField = { ...field, count: field.count ? field.count + 1 : 1 };
+      const updatedFields = fields.map((item) => item.name === name ? updatedField : item);
+
+      return { fields: updatedFields };
+    });
   };
 
   onSubmit = (event) => {
@@ -112,7 +126,9 @@ class FormBuilder extends React.Component {
 
   getData = () => {
     const { fields } = this.state;
-    const cleanedFields = fields.map(({ name, value }) => ({ [name]: value }));
+    const cleanedFields = fields.map(({ name, value, count }) => {
+      return { [name]: value ? value : count };
+    });
     const data = {};
 
     for (let item of cleanedFields) {
@@ -149,6 +165,17 @@ class FormBuilder extends React.Component {
                     { ...item}
                     onChange={this.onChange}
                     onBlur={this.onFocusOut}
+                  />
+                );
+              }
+
+              if (item.type === 'file') {
+                return (
+                  <AttachmentInput
+                    className="attachmentInputDefault"
+                    key={item.name}
+                    {...item}
+                    onChange={this.onAttachment}
                   />
                 );
               }

@@ -65,9 +65,8 @@ class CheckoutForm extends React.Component {
   submit = () => {
     setTimeout(() => {
       console.log('Total', this.state.results);
+      this.props.history.push('/thanks');
     }, 1000);
-
-    this.props.history.push('/');
   };
 
   render () {

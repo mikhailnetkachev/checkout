@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Thanks = () => {
   return (
     <div className="appWrapper">
-      <div
+      <h2
         className="titleDefault"
         style={{ marginTop: '80px' }}
-      >Homepage is here!</div>
+      >You can find results in console.</h2>
       <div
         style={{ textAlign: 'center', fontSize: '30px' }}
-      ><Link to={'checkout'}>To Checkout =></Link></div>
+      >Do it <Link to="/checkout">again</Link>?</div>
     </div>
   );
 };
 
-export default Home;
+export default Thanks;

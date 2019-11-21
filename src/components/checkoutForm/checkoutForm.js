@@ -20,10 +20,10 @@ class CheckoutForm extends React.Component {
     const item = {
       type: 'contacts', title: 'Your contacts',
       fields: [
-        { name: 'companyName', type: 'text', checks: null, title: 'Your company name' },
-        { name: 'numberOfPeople', type: 'number', checks: [{ title: 'required' }, { title: 'range', from: 1, to: 99 }], title: 'Number of people' },
-        { name: 'businessArea', type: 'text', checks: [{ title: 'required' }], title: 'Business area' },
-        { name: 'description', type: 'area', checks: [{ title: 'required' }], title: 'Description' },
+        { name: 'companyName', type: 'text', checks: null, title: 'Your company name', placeholder: 'Type text' },
+        { name: 'numberOfPeople', type: 'number', checks: [{ title: 'required' }, { title: 'range', from: 1, to: 99 }], title: 'Number of people', placeholder: '1-99' },
+        { name: 'businessArea', type: 'text', checks: [{ title: 'required' }], title: 'Business area', placeholder: 'Design, Marketing, Development, etc.' },
+        { name: 'description', type: 'area', checks: [{ title: 'required' }], title: 'Description', placeholder: 'Type text' },
       ]
     };
     const steps = [item, item, item];
@@ -32,6 +32,7 @@ class CheckoutForm extends React.Component {
   }
 
   incrementStepIndex = () => {
+
     this.setState(({ currentStepIndex, steps }) => {
       const newValue = currentStepIndex + 1;
       const nextValue = newValue < steps.length ? newValue : currentStepIndex;
@@ -46,15 +47,17 @@ class CheckoutForm extends React.Component {
   };
 
   setData = (index, data) => {
-    this.setState((previousState) => {
-      const results = previousState.results.slice();
-      results[index] = data;
 
-      return { results };
+    this.setState(({ results }) => {
+      const updatedResults = results.slice();
+      updatedResults[index] = data;
+
+      return { results: updatedResults };
     });
   };
 
   submit = () => {
+
     setTimeout(() => {
       console.log('Total', this.state.results);
       this.props.history.push('/thanks');
@@ -79,7 +82,6 @@ class CheckoutForm extends React.Component {
         <StepsTape
           currentStepIndex={currentStepIndex}
           steps={steps}
-          goPreviousStep={this.goPreviousStep}
           goNextStep={this.goNextStep}
           submit={this.submit}
         />

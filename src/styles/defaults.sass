@@ -32,8 +32,12 @@
     font-family: $fontDefault
     font-size: 16px
     line-height: 32px
-    color: $colorTextSub
+    color: $colorTextDefault
     background-color: $colorBackgroundDefault
+
+    &::placeholder
+      color: $colorTextSub
+
 
   .title
     font-size: 14px
@@ -66,6 +70,7 @@
 .textareaDefault .textarea
     resize: none
     padding: 14px 16px
+    height: 168px
 
 .titleDefault
   font-size: 40px

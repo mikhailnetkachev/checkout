@@ -68,6 +68,8 @@ class FormBuilder extends React.Component {
             result = validators.range(value, check);
             if (!result.isValid) { return result; }
             break;
+          default:
+            return result;
         }
       }
     }

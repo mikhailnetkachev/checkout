@@ -10,7 +10,7 @@ const Home = () => {
       >Homepage is here!</div>
       <div
         style={{ textAlign: 'center', fontSize: '30px' }}
-      ><Link to={'checkout'}>To Checkout =></Link></div>
+      ><Link to={'checkout'} style={{ color: 'inherit' }}>To Checkout =></Link></div>
     </div>
   );
 };

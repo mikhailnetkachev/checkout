@@ -40,9 +40,7 @@ class FormBuilder extends React.Component {
     setTimeout(() => {
 
       if (this.isFormValid()) {
-        const { fields } = this.state;
-        const data = fields.map(({ name, value }) => ({ [name]: value }));
-
+        const data = this.getData();
         this.props.onSubmit(data);
       }
     }, 0);
@@ -106,7 +104,20 @@ class FormBuilder extends React.Component {
     return true;
   };
 
+  getData = () => {
+    const { fields } = this.state;
+    const cleanedFields = fields.map(({ name, value }) => ({ [name]: value }));
+    const data = {};
+
+    for (let item of cleanedFields) {
+      Object.assign(data, item);
+    }
+
+    return data;
+  };
+
   render () {
+    const { className } = this.props;
     const { fields } = this.state;
 
     if (!fields) {
@@ -117,52 +128,57 @@ class FormBuilder extends React.Component {
 
     return (
       <form
+        className={className}
         onSubmit={this.onSubmit}
       >
-        {
-          fields.map((item) => {
+        <div className="fields">
+          {
+            fields.map((item) => {
 
-            if (item.type === 'text') {
-              return (
-                <div>
+              if (item.type === 'text') {
+                return (
+                  <div>
+                    <input
+                      type="text"
+                      data-valid={item.isValid ? 1 : 0}
+                      name={item.name}
+                      onChange={this.onChange}
+                      onBlur={this.onFocusOut}
+                    />
+                  </div>
+                );
+              }
+
+              if (item.type === 'number') {
+                return (
                   <input
-                    type="text"
+                    type="number"
                     data-valid={item.isValid ? 1 : 0}
                     name={item.name}
                     onChange={this.onChange}
                     onBlur={this.onFocusOut}
                   />
-                </div>
-              );
-            }
+                );
+              }
 
-            if (item.type === 'number') {
-              return (
-                <input
-                  type="number"
-                  data-valid={item.isValid ? 1 : 0}
-                  name={item.name}
-                  onChange={this.onChange}
-                  onBlur={this.onFocusOut}
-                />
-              );
-            }
-
-            if (item.type === 'area') {
-              return (
-                <div>
+              if (item.type === 'area') {
+                return (
+                  <div>
                   <textarea
                     data-valid={item.isValid ? 1 : 0}
                     name={item.name}
                     onChange={this.onChange}
                     onBlur={this.onFocusOut}
                   />
-                </div>
-              );
-            }
-          })
-        }
-        <button type="submit">Submit</button>
+                  </div>
+                );
+              }
+            })
+          }
+        </div>
+        <div className="options">
+          <button type="submit">Submit</button>
+        </div>
       </form>
     );
   }

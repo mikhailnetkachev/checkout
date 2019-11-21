@@ -22,6 +22,7 @@ const Home = () => {
       ><Link to={'checkout'} style={{ color: 'inherit' }}>To Checkout =></Link></div>
       <FormBuilder
         fields={inputs}
+        className="testform"
         onSubmit={(data) => console.log('submitted', data)}
       />
     </div>

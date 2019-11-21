@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { validators } from '../../helpers';
+import { Input, Textarea } from '../customs';
+
+import {
+  combineStrings as cs,
+  validators
+} from '../../helpers';
 
 class FormBuilder extends React.Component {
 
@@ -100,7 +105,6 @@ class FormBuilder extends React.Component {
       }
     }
 
-    console.log(true);
     return true;
   };
 
@@ -128,51 +132,30 @@ class FormBuilder extends React.Component {
 
     return (
       <form
-        className={className}
+        className={cs()("formBuilder", className)}
         onSubmit={this.onSubmit}
       >
         <div className="fields">
           {
             fields.map((item) => {
 
-              if (item.type === 'text') {
-                return (
-                  <div>
-                    <input
-                      type="text"
-                      data-valid={item.isValid ? 1 : 0}
-                      name={item.name}
-                      onChange={this.onChange}
-                      onBlur={this.onFocusOut}
-                    />
-                  </div>
-                );
-              }
-
-              if (item.type === 'number') {
-                return (
-                  <input
-                    type="number"
-                    data-valid={item.isValid ? 1 : 0}
-                    name={item.name}
-                    onChange={this.onChange}
-                    onBlur={this.onFocusOut}
-                  />
-                );
-              }
-
               if (item.type === 'area') {
                 return (
-                  <div>
-                  <textarea
-                    data-valid={item.isValid ? 1 : 0}
-                    name={item.name}
+                  <Textarea
+                    { ...item}
                     onChange={this.onChange}
                     onBlur={this.onFocusOut}
                   />
-                  </div>
                 );
               }
+
+              return (
+                <Input
+                  { ...item}
+                  onChange={this.onChange}
+                  onBlur={this.onFocusOut}
+                />
+              );
             })
           }
         </div>

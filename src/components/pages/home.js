@@ -5,10 +5,10 @@ import FormBuilder from '../formBuilder';
 
 const Home = () => {
   const inputs = [
-    { name: 'companyName', type: 'text', checks: null },
-    { name: 'numberOfPeople', type: 'number', checks: [{ title: 'required' }, { title: 'range', from: 1, to: 99 }] },
-    { name: 'businessArea', type: 'text', checks: [{ title: 'required' }] },
-    { name: 'description', type: 'area', checks: [{ title: 'required' }] },
+    { name: 'companyName', type: 'text', checks: null, title: 'Your company name' },
+    { name: 'numberOfPeople', type: 'number', checks: [{ title: 'required' }, { title: 'range', from: 1, to: 99 }], title: 'Number of people' },
+    { name: 'businessArea', type: 'text', checks: [{ title: 'required' }], title: 'Business area' },
+    { name: 'description', type: 'area', checks: [{ title: 'required' }], title: 'Description' },
   ];
 
   return (

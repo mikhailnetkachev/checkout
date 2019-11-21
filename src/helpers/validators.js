@@ -12,7 +12,7 @@ const validators = {
     const isEmpty = !value.length;
 
     if (isEmpty) {
-      return { isValid: false, error: 'This field in required' };
+      return { isValid: false, error: 'This field is required' };
     }
 
     return { isValid: true, error: '' };
